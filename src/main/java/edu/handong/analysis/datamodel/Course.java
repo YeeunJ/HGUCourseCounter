@@ -13,16 +13,16 @@ public class Course {
 	private int yearTaken;
 	private int semesterCourseTaken;
 
-	public Course(String line){
-		studentId = line.split(",")[0].trim();
-		yearMonthGraduated = line.split(",")[1].trim();
-		firstMajor = line.split(",")[2].trim();
-		secondMajor = line.split(",")[3].trim();
-		courseCode = line.split(",")[4].trim();
-		courseName = line.split(",")[5].trim();
-		courseCredit = line.split(",")[6].trim();
-		yearTaken = Integer.parseInt(line.split(",")[7].trim());
-		semesterCourseTaken = Integer.parseInt(line.split(",")[8].trim());
+	public Course(ArrayList<String> line){
+		studentId = line.get(0);
+		yearMonthGraduated = line.get(1);
+		firstMajor = line.get(2);
+		secondMajor = line.get(3);
+		courseCode = line.get(4);
+		courseName = line.get(5);
+		courseCredit = line.get(6);
+		yearTaken = Integer.parseInt(line.get(7));
+		semesterCourseTaken = Integer.parseInt(line.get(8));
 	}
 	
 	public String getterStudentId() {
@@ -34,4 +34,15 @@ public class Course {
 		return YearandSemester;
 	}
 	
+	public int getteryearTaken() {
+		return yearTaken;
+	}
+	
+	public String gettercourseCode() {
+		return courseCode;
+	}
+	
+	public String gettercourseName() {
+		return courseName;
+	}
 }

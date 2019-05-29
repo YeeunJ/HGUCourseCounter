@@ -3,6 +3,7 @@ package edu.handong.analysis.datamodel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Student {
 	private String studentId;
 	private ArrayList<Course> coursesTaken; // 학생이 들은 수업 목록
@@ -44,5 +45,29 @@ public class Student {
 		return studentId;
 	}
 	
+	public int check_course(String year, String code) {
+		for(Course cs: coursesTaken) {
+			if((cs.gettercourseCode().equals(code)) && (cs.getterYearandSemester().equals(year)))
+				return 1;
+		}
+		return 0;
+	}
+	
 
+	public boolean check_year(String year) {
+		for(Course cs: coursesTaken) {
+			if(cs.getterYearandSemester().equals(year))
+				return true;
+		}
+		return false;
+	}
+	
+	public String findCourseName(String code) {
+		for(Course cs: coursesTaken) {
+			if(cs.gettercourseCode().equals(code))
+					return cs.gettercourseName();
+		}
+		return null;
+		
+	}
 }

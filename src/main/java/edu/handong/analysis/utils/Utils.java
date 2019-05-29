@@ -2,38 +2,49 @@ package edu.handong.analysis.utils;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
+import edu.handong.analysis.datamodel.Course;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
+import java.io.Reader;
 
 
 public class Utils {
 	
-	public static ArrayList<String> getLines(String file, boolean removeHeader) throws NotEnoughArgumentException{
-		Scanner inputStream = null;
-		ArrayList<String> lines = new ArrayList<String>();
-		String line;
+	public static ArrayList<Course> getLines(String file, boolean removeHeader) throws NotEnoughArgumentException{
+		ArrayList<Course> css = new ArrayList<Course>();
 		
-	    try {
-	    	File input_file = new File (file);
-	    	if(!input_file.exists())
-				throw new NotEnoughArgumentException("The file path does not exist. Please check your CLI argument!");
-	    	inputStream = new Scanner (input_file);
-	    } catch (FileNotFoundException e) {
-	    	System.out.println(e.getMessage());
-	    	System.exit (0);
-	    }
-	    
-	    if(removeHeader == true) {
-	    	line = inputStream.nextLine ();
-	    }
-	    while (inputStream.hasNextLine ()) {
-			line = inputStream.nextLine ();
-			lines.add(line);
-		}
-		inputStream.close ();
+		try {
+            Reader in = new FileReader(file);
+
+            CSVParser parser = CSVFormat.EXCEL.parse(in);
+
+            // Loop on all the records of the file
+            for (CSVRecord record : parser) {
+            	ArrayList<String> s = new ArrayList<String>();
+	        	// Process the headers in the first line
+	            if((record.getRecordNumber() == 1)&&(removeHeader == true)) {
+	            	for(int i = 0; i <9; i++)
+	            		s.add(record.get(i).trim());
+	            	continue;
+	            }
+	        	for(int i = 0; i <9; i++)
+	        		s.add(record.get(i).trim());
+	        	Course cs = new Course(s);
+	        	css.add(cs);
+        	}
+        } catch( Exception e ){
+            e.printStackTrace();
+        }
 		
-	    return lines;
+		return css;
 	}
 	
 	
