@@ -1,24 +1,21 @@
 package edu.handong.analysis.utils;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-
 import edu.handong.analysis.datamodel.Course;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 
 
 public class Utils {
 	
-	public static ArrayList<Course> getLines(String file, boolean removeHeader) throws NotEnoughArgumentException{
+	public static ArrayList<Course> getLines(String file, boolean removeHeader) throws NotEnoughArgumentException, IOException{
 		ArrayList<Course> css = new ArrayList<Course>();
 		
 		try {
@@ -40,8 +37,9 @@ public class Utils {
 	        	Course cs = new Course(s);
 	        	css.add(cs);
         	}
-        } catch( Exception e ){
-            e.printStackTrace();
+        } catch(FileNotFoundException e){
+        	System.out.println("The file path does not exist. Please check your CLI argument!");
+			System.exit(0);
         }
 		
 		return css;

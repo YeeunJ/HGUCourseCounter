@@ -1,5 +1,6 @@
 package edu.handong.analysis;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +27,9 @@ public class HGUCoursePatternAnalyzer {
 	 * Run method must not be changed!!
 	 * @param args
 	 * @throws NotEnoughArgumentException 
+	 * @throws IOException 
 	 */
-	public void run(String[] args) throws NotEnoughArgumentException {
+	public void run(String[] args) throws NotEnoughArgumentException, IOException {
 		Options options = createOptions();
 		if(parseOptions(options, args)){
 			if (help){
@@ -133,7 +135,7 @@ public class HGUCoursePatternAnalyzer {
 	
 	private ArrayList<String> countNumberOfStudentsInEachSemester(Map<String, Student> sortedStudents) {
 		ArrayList<String> all_lines = new ArrayList<String>();
-		String line, pre_year = null, coursename = null;
+		String line, coursename = null;
 		int all_count = 0;
 		int count = 0;
 		all_lines.add("Year,Semester,CouseCode,CourseName,TotalStudents,StudentsTaken,Rate");

@@ -15,11 +15,13 @@ public class Student {
 		this.coursesTaken = new ArrayList<Course>();
 		this.semestersByYearAndSemester = new HashMap<String,Integer>();
 	}
+	
 	public void addCourse(Course newRecord) {
 		coursesTaken.add(newRecord);
 		if(semestersByYearAndSemester.containsKey(newRecord.getterYearandSemester()) == false)
 			semestersByYearAndSemester.put(newRecord.getterYearandSemester(), semestersByYearAndSemester.size()+1);
 	}
+	
 	public HashMap<String,Integer> getSemestersByYearAndSemester(){
 		return semestersByYearAndSemester;
 		
